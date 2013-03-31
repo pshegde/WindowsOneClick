@@ -13,7 +13,7 @@ using System.Net;
 using System.IO;
 using System.Threading;
 
-namespace OneButtonApp
+namespace OneClickApp
 {
 		public delegate void getConnectionDataDelegate(Object request_id);
 		//public struct XMLRPCaddRequestResult

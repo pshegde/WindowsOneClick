@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
@@ -9,7 +9,7 @@ using System.Net;
 using System.IO;
 using System.Security.Cryptography;
 
-namespace OneButtonApp
+namespace OneClickApp
 {
 		public struct XMLRPCaddRequestResult
 		{
@@ -61,7 +61,7 @@ namespace OneButtonApp
 				[XmlRpcMissingMapping(MappingAction.Ignore)]
 				public string errormsg;
 		}
-	  public struct XMLRPCOneButtonParams
+	  public struct XMLRPCOneClickParams
 		{
 				[XmlRpcMissingMapping(MappingAction.Ignore)]
 				public string status;
@@ -83,23 +83,23 @@ namespace OneButtonApp
 				public string ostype;
 		}
 	
-		public interface IOneButtonXmlRPC : IXmlRpcProxy
+		public interface IOneClickXmlRPC : IXmlRpcProxy
 		{
 				[XmlRpcMethod]
-				XMLRPCaddRequestResult XMLRPCaddRequest(int image_id, string time, int duration);
+                XMLRPCaddRequestResult XMLRPCaddRequest(int image_id, string time, int duration, int oneclickid);
 				[XmlRpcMethod]
 				XMLRPCRequestStatus XMLRPCgetRequestStatus(Object request_id);
 				[XmlRpcMethod]
 				XMLRPCconnectData XMLRPCgetRequestConnectData(Object request_id, string remoteIP);
 				[XmlRpcMethod]
-				XMLRPCOneButtonParams XMLRPCgetOneButtonParams(int onebuttonid);
+				XMLRPCOneClickParams XMLRPCgetOneClickParams(int oneclickid);
 				[XmlRpcMethod]
 				XMLRPCgetIP XMLRPCgetIP();			
 		}
 	class Request {
 
 		
-		private int oneButtonId = 0;
+		private int oneClickId = 0;
 		private int image_id = 0;
 		private int duration = 30;
 		private string url = null;
@@ -190,7 +190,7 @@ namespace OneButtonApp
 
 				try
 				{
-						IOneButtonXmlRPC proxy;
+						IOneClickXmlRPC proxy;
 						XMLRPCaddRequestResult create_image;
 						XMLRPCconnectData connect_data;
 						string decryData;
@@ -214,45 +214,45 @@ namespace OneButtonApp
 						sendStateChange("Authenticating:", "Checking credentials...");
 
 						Thread.Sleep(2000);						
-						IOneButtonXmlRPC OneButtonRPC = XmlRpcProxyGen.Create<IOneButtonXmlRPC>();
+						IOneClickXmlRPC OneClickRPC = XmlRpcProxyGen.Create<IOneClickXmlRPC>();
 						XmlRpcStruct[] structure = new XmlRpcStruct[50];
-						proxy = (IOneButtonXmlRPC)XmlRpcProxyGen.Create(typeof(IOneButtonXmlRPC));
+						proxy = (IOneClickXmlRPC)XmlRpcProxyGen.Create(typeof(IOneClickXmlRPC));
 						proxy.Url = url;
 						proxy.Headers.Add("X-APIVERSION", "2");
 						proxy.Headers.Add("X-User", username);
 						proxy.Headers.Add("X-Pass", password);
 						ServicePointManager.ServerCertificateValidationCallback = AcceptCertificateNoMatterWhat;
-						XMLRPCOneButtonParams oneButtonParams = proxy.XMLRPCgetOneButtonParams(oneButtonId);
-						if (oneButtonParams.status.Equals("success"))
+						XMLRPCOneClickParams oneClickParams = proxy.XMLRPCgetOneClickParams(oneClickId);
+						if (oneClickParams.status.Equals("success"))
 						{
-								image_id = oneButtonParams.imageid;
-								duration = oneButtonParams.duration;
+								image_id = oneClickParams.imageid;
+								duration = oneClickParams.duration;
 						}
-						else if (oneButtonParams.status.Equals("error"))
+						else if (oneClickParams.status.Equals("error"))
 						{
-								if (oneButtonParams.errorcode == 3)
+								if (oneClickParams.errorcode == 3)
 								{
 										sendErrorMessage("Authentication failure:", "User making a call is not a valid VCL user");
 										return;
 								}
-								else if (oneButtonParams.errorcode == 4)
+								else if (oneClickParams.errorcode == 4)
 								{
-										sendErrorMessage("Invalid Configuration:", "One-Button does not exist. It may have been deleted.");
+										sendErrorMessage("Invalid Configuration:", "OneClick does not exist. It may have been deleted.");
 										return;
 								}
-								else if (oneButtonParams.errorcode == 5)
+								else if (oneClickParams.errorcode == 5)
 								{
 										sendErrorMessage("No Privileges:", "User does not have enough privileges.");
 										return;
 								}
-								else if (oneButtonParams.errorcode == 6)
+								else if (oneClickParams.errorcode == 6)
 								{
-										sendErrorMessage("One-Button missing:", "One-Button is not yet created. Please create one-button and try again.");
+										sendErrorMessage("OneClick missing:", "OneClick is not yet created. Please create OneClick and try again.");
 										return;
 								}
 						}
 
-						if( (oneButtonParams.autologin == 1) && (oneButtonParams.ostype.Equals("linux")) )
+						if( (oneClickParams.autologin == 1) && (oneClickParams.ostype.Equals("linux")) )
 						{
 								string fileName = execPath + "\\" + puttyInfo;
 								if (File.Exists(fileName))
@@ -278,7 +278,7 @@ namespace OneButtonApp
 												}
 												else
 												{
-														if ((oneButtonParams.autologin == 1) && (puttyExec.Equals("")))
+														if ((oneClickParams.autologin == 1) && (puttyExec.Equals("")))
 														{
 																sendErrorMessage("Putty missing:", "Putty installation is missing. Please download and try again.");
 																return;
@@ -291,7 +291,7 @@ namespace OneButtonApp
 
 
 						sendStateChange("Add Image:", "Creating reservation...");
-						create_image = proxy.XMLRPCaddRequest(image_id, "now", duration);
+                        create_image = proxy.XMLRPCaddRequest(image_id, "now", duration, oneClickId);
 
 						if (create_image.status.Equals("success"))
 						{
@@ -373,19 +373,19 @@ namespace OneButtonApp
 						string password_reservation = connect_data.password;
 
 						bool success = false;
-						if ((oneButtonParams.ostype.Equals("windows")) && (oneButtonParams.autologin == 1))
+						if ((oneClickParams.ostype.Equals("windows")) && (oneClickParams.autologin == 1))
 						{
 								sendStateChange("Connection:", "Connecting to machine...");
 								Thread.Sleep(5000);
 								success = rdpConnect(server_ip, username_reservation, password_reservation);
 						}
-						else if ((oneButtonParams.ostype.Equals("linux")) && (oneButtonParams.autologin == 1))
+						else if ((oneClickParams.ostype.Equals("linux")) && (oneClickParams.autologin == 1))
 						{
 								sendStateChange("Connection:", "Connecting to machine...");
 								Thread.Sleep(5000);
 								success = puttyConnect(server_ip, username_reservation, password_reservation);
 						}
-						else if (oneButtonParams.autologin == 0)
+						else if (oneClickParams.autologin == 0)
 						{
 								success = true;
 						}
@@ -588,9 +588,9 @@ namespace OneButtonApp
 												url = items[1].ToString() + "=" + items[2].ToString();
 												continue;
 										}
-										else if (items[0].Equals("oneButtonID"))
+										else if (items[0].Equals("oneClickID"))
 										{
-												oneButtonId = int.Parse(items[1].ToString());												
+												oneClickId = int.Parse(items[1].ToString());												
 										}
 								}
 								reader.Close();

@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
-namespace OneButtonApp
+namespace OneClickApp
 {
 		public partial class PuttyInfo : Form
 		{

@@ -1,4 +1,4 @@
-namespace OneButtonApp
+namespace OneClickApp
 {
 		partial class Form1
 		{

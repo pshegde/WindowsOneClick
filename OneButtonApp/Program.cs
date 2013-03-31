@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
 
-namespace OneButtonApp
+namespace OneClickApp
 {
 		static class Program
 		{
@@ -30,15 +30,15 @@ namespace OneButtonApp
 						Application.SetCompatibleTextRenderingDefault(false);												
 						if (!(File.Exists(path)))
 						{
-								OneButtonAppCred frmLogin = new OneButtonAppCred();
+								OneClickAppCred frmLogin = new OneClickAppCred();
 								if (frmLogin.ShowDialog() == DialogResult.OK)
 								{
-										Application.Run(new frmOneButton());
+										Application.Run(new frmOneClick());
 								}
 						}
 						else
 						{
-								Application.Run(new frmOneButton());
+								Application.Run(new frmOneClick());
 						}
 				}
 		}
