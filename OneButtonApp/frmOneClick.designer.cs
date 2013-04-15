@@ -150,7 +150,7 @@
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
-            // label2 : For status of extend reservation request.
+            // label2 : For status of extend reservation request
             // 
             this.label2.Location = new System.Drawing.Point(160, 100);
             this.label2.Name = "label2";

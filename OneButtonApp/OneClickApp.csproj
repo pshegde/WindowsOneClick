@@ -13,7 +13,7 @@
     <ManifestCertificateThumbprint>6D0DB0BD1401AE4F86788597D8A3FE3E8897E2C4</ManifestCertificateThumbprint>
     <ManifestKeyFile>OneButtonApp_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>c:\deploy\OneButtonApp_new\</PublishUrl>
     <Install>true</Install>

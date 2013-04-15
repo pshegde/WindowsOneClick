@@ -768,7 +768,7 @@ namespace OneClickApp
 				rijAlg.Mode = CipherMode.CBC;
 				rijAlg.Padding = PaddingMode.Zeros;
 
-				// Create a decrytor to perform the stream transform.
+				// Create a decrytor to perform the stream transform
 				ICryptoTransform decryptor = rijAlg.CreateDecryptor(rijAlg.Key, rijAlg.IV);
 
 				// Create the streams used for decryption.

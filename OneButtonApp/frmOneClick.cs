@@ -16,9 +16,7 @@ namespace OneClickApp
 
 	public partial class frmOneClick : Form {
 		private Request request = null;
-        private String request_id = "";
-       
-		
+     	
         public frmOneClick() {
 			InitializeComponent();
 
