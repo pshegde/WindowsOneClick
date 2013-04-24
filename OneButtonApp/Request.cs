@@ -96,6 +96,16 @@ namespace OneClickApp
         [XmlRpcMissingMapping(MappingAction.Ignore)]
         public string errormsg;
     }
+
+    public struct XMLRPCendRequestResult
+    {
+        [XmlRpcMissingMapping(MappingAction.Ignore)]
+        public string status;
+        [XmlRpcMissingMapping(MappingAction.Ignore)]
+        public int errorcode;
+        [XmlRpcMissingMapping(MappingAction.Ignore)]
+        public string errormsg;
+    }
     
     public interface IOneClickXmlRPC : IXmlRpcProxy
     {
@@ -110,7 +120,9 @@ namespace OneClickApp
         [XmlRpcMethod]
         XMLRPCextendReservationResult XMLRPCextendRequest(Object request_id, int extend_time);
         [XmlRpcMethod]
-        XMLRPCgetIP XMLRPCgetIP();			
+        XMLRPCgetIP XMLRPCgetIP();
+        [XmlRpcMethod]
+        XMLRPCendRequestResult XMLRPCendRequest(Object request_id);    	
 	}
 	
     class Request
@@ -364,8 +376,18 @@ namespace OneClickApp
 					}
 					else if (request_status.status.Equals("timedout"))
 					{
-						sendErrorMessage("Timeout:", "Image timedout. Try again.");
-						return;
+                        sendStateChange("Timedout:","Connecting to a new reservation");
+                        XMLRPCendRequestResult end_req_result = proxy.XMLRPCendRequest(request_id);
+                        if (end_req_result.status.ToString().Equals("error"))
+                        {
+                            sendErrorMessage("Error: ", end_req_result.errormsg);
+                            return;
+                        }
+                        else if (end_req_result.status.ToString().Equals("success"))
+                        {
+                            makeResv();
+                            return;
+                        }
 					}
 				    else if (request_status.status.Equals("error"))
 					{
