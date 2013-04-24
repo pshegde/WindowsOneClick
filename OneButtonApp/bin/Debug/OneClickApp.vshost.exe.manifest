@@ -66,14 +66,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OneClickApp.exe" size="114176">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OneClickApp.exe" size="114688">
       <assemblyIdentity name="OneClickApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>C3YoeEhmRABXKYoNl2twNKxCqvE=</dsig:DigestValue>
+        <dsig:DigestValue>ZU6wxdEC9wYD+DHtjCoSr66E9Ag=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

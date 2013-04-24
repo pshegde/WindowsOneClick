@@ -73,7 +73,7 @@ namespace OneClickApp
             result = proxy.XMLRPCextendRequest(this.request.get_req_id(), extend_time);
             if (result.status.Equals("error"))
             {
-                display_extendreq_error(result.errormsg.ToString());
+                display_extendreq_error(result.errormsg);
                 return;
             }
             else

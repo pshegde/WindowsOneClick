@@ -122,7 +122,7 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Extend Reservation By";
             // 
-            // comboBox1 : Durations for extend reservation request.
+            // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
@@ -137,9 +137,9 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 10;
-            this.comboBox1.Text = "Select Dration";
+            this.comboBox1.Text = "Select Duration";
             // 
-            // btnSubmit : To submit extend reservation request.
+            // btnSubmit
             // 
             this.btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubmit.Location = new System.Drawing.Point(160, 163);
@@ -150,13 +150,12 @@
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
-            // label2 : For status of extend reservation request
+            // label2
             // 
             this.label2.Location = new System.Drawing.Point(160, 100);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(300, 15);
             this.label2.TabIndex = 9;
-            //this.label2.Text = "ldjflishfdljkdshjsfdghkfdjsghdjfslkghkdshgljsadhfkjsdahfjsadhfjsdahfsdjkfhdlsjk";
             // 
             // frmOneClick
             // 
@@ -174,7 +173,7 @@
             this.Controls.Add(this.lblMessageHeader);
             this.Controls.Add(this.progressBar1);
             this.Name = "frmOneClick";
-            this.Text = "One-Button Application";
+            this.Text = "OneClick Application";
             this.Load += new System.EventHandler(this.frmOneClick_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
