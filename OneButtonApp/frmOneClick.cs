@@ -114,15 +114,32 @@ namespace OneClickApp
 		private void button1_Click(object sender, EventArgs e) {
 			
 			progressBar1.Show();
-			request.makeRequest();
+			request.makeRequest(1);
 		}
+
+        private void btnSubmit1_Click(object sender, EventArgs e)
+        {
+            int connectFlag;
+            //request.makeRequest();
+            if (this.comboBox2.Text == "New reservation")
+                connectFlag = 1;
+            else connectFlag = 0;
+            this.comboBox2.Visible = false;
+            this.btnSubmit1.Visible = false;
+            this.label3.Visible = false;
+            this.btnClose.Visible = true;
+            progressBar1.Show();
+            request.execPath = Application.StartupPath;
+            request.makeRequest(connectFlag);
+            					
+        }
 
 
         private void frmOneClick_Load(object sender, EventArgs e)
 		{
 
-		    progressBar1.Show();
-
+		    //progressBar1.Show();
+            this.btnClose.Visible = false;
 			ManagementObjectCollection mbsList = null;
 			ManagementObjectSearcher mbs = new ManagementObjectSearcher("Select * From Win32_processor");
 			mbsList = mbs.Get();
@@ -140,8 +157,7 @@ namespace OneClickApp
 			    Request.myRijndael.Key = ASCIIEncoding.ASCII.GetBytes(request.gUID);
 				Request.myRijndael.IV = ASCIIEncoding.ASCII.GetBytes(request.gUID);
             }
-			request.makeRequest();
-			request.execPath = Application.StartupPath;					
+            //while (connectFlag == -1) { }
 		}
 
 		

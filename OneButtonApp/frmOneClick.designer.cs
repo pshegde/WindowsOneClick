@@ -35,7 +35,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btnSubmit = new System.Windows.Forms.Button();
+            this.btnSubmit1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -53,7 +56,7 @@
             // 
             this.lblMessageHeader.AutoSize = true;
             this.lblMessageHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMessageHeader.Location = new System.Drawing.Point(30, 101);
+            this.lblMessageHeader.Location = new System.Drawing.Point(20, 101);
             this.lblMessageHeader.Name = "lblMessageHeader";
             this.lblMessageHeader.Size = new System.Drawing.Size(0, 16);
             this.lblMessageHeader.TabIndex = 7;
@@ -157,12 +160,50 @@
             this.label2.Size = new System.Drawing.Size(300, 15);
             this.label2.TabIndex = 9;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(80, 85);
+            this.label3.Name = "label1";
+            this.label3.Size = new System.Drawing.Size(152, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Connect to an existing reservation?";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Connect",
+            "New reservation"});
+            this.comboBox2.Location = new System.Drawing.Point(80, 110);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.TabIndex = 10;
+            this.comboBox2.Text = "Connect";
+
+            // 
+            // btnSubmit1
+            // 
+            this.btnSubmit1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmit1.Location = new System.Drawing.Point(80, 140);
+            this.btnSubmit1.Name = "btnSubmit1";
+            this.btnSubmit1.Size = new System.Drawing.Size(75, 23);
+            this.btnSubmit1.TabIndex = 11;
+            this.btnSubmit1.Text = "Submit";
+            this.btnSubmit1.UseVisualStyleBackColor = true;
+            this.btnSubmit1.Click += new System.EventHandler(this.btnSubmit1_Click);
+            // 
+            // OneClickAppCred
+            // 
+            // 
             // frmOneClick
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(317, 225);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
@@ -172,6 +213,7 @@
             this.Controls.Add(this.lblMessageDesc);
             this.Controls.Add(this.lblMessageHeader);
             this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.btnSubmit1);
             this.Name = "frmOneClick";
             this.Text = "OneClick Application";
             this.Load += new System.EventHandler(this.frmOneClick_Load);
@@ -196,6 +238,9 @@
             private System.Windows.Forms.Label label1;
             private System.Windows.Forms.ComboBox comboBox1;
             private System.Windows.Forms.Button btnSubmit;
+            private System.Windows.Forms.Label label3;
+            private System.Windows.Forms.ComboBox comboBox2;
+            private System.Windows.Forms.Button btnSubmit1;
 	}
 }
 

@@ -110,7 +110,7 @@ namespace OneClickApp
     public interface IOneClickXmlRPC : IXmlRpcProxy
     {
 	    [XmlRpcMethod]
-        XMLRPCaddRequestResult XMLRPCaddRequest(int image_id, string time, int duration, int oneclickid);
+        XMLRPCaddRequestResult XMLRPCaddRequest(int image_id, string time, int duration, int oneclickid, int connectFlag);
         [XmlRpcMethod]
         XMLRPCRequestStatus XMLRPCgetRequestStatus(Object request_id);
         [XmlRpcMethod]
@@ -135,6 +135,7 @@ namespace OneClickApp
 		private string parseFile = "config";
 		private string puttyInfo = "puttyInfo";
         private String req_id = "";
+        private int connectFlag;
 
 		public string username = null;
 		public string password = null;
@@ -189,9 +190,10 @@ namespace OneClickApp
 		}
 
 		
-        public void makeRequest() 
+        public void makeRequest(int connectFlag) 
         {
-			Thread workerThread = new Thread(makeResv);
+			this.connectFlag = connectFlag;
+            Thread workerThread = new Thread(makeResv);
 			workerThread.Start();
 		}
 
@@ -343,7 +345,7 @@ namespace OneClickApp
                 }
                 
                 sendStateChange("Add Image:", "Creating reservation...");
-                create_image = proxy.XMLRPCaddRequest(image_id, "now", duration, oneClickId);
+                create_image = proxy.XMLRPCaddRequest(image_id, "now", duration, oneClickId, this.connectFlag);
 
 				if (create_image.status.Equals("success"))
 				{
